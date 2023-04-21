@@ -41,6 +41,7 @@ class etudiantController extends Controller
             if(is_null($etudiant)){
                 response()->json(['message'=>'etudiant introuvable'],404);
             }
+            $etudiant->cours()->delete(); 
             $etudiant->delete();
             return response()->json(['message'=>'le etudiant  est  supprimer'],204);
            }
@@ -71,7 +72,7 @@ class etudiantController extends Controller
             'password' => 'required',
             'class' => 'required',
             'teleN' => 'required',
-        
+           'birthday'=>'required',
         ];
         $validator = Validator::make($request->all(),$rules);
         if($validator->fails()){
@@ -84,6 +85,7 @@ class etudiantController extends Controller
                 'password'=> Hash::make($request->password),
                 'class'=>$request->class,
                 'teleN'=>$request->teleN,
+                'birthday'=>$request->birthday
             ]);
             
             if($result){

@@ -14,11 +14,12 @@ return new class extends Migration
         Schema::create('cours', function (Blueprint $table) {
             $table->id();
             $table->string('name',50);
-            $table->string('enseignant_id',50);
-            $table->string('etudiant_id',50);
-            $table->string('nombre_etudiant');
-            $table->integer('date');
-           
+            $table->foreignId('enseignant_id')->constrained();
+            $table->foreignId('etudiant_id')->constrained();
+            $table->foreignId('categorie_id')->constrained();
+      
+            $table->integer('nombre_etudiant');
+            $table->date('date');
             $table->timestamps();
         });
     }

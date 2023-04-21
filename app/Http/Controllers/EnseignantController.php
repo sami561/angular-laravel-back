@@ -42,6 +42,7 @@ class EnseignantController extends Controller
                 if(is_null($enseignant)){
                     response()->json(['message'=>'enseignant introuvable'],404);
                 }
+                $enseignant->cours()->delete(); 
                 $enseignant->delete();
                 return response()->json(['message'=>'le enseignant  est  supprimer'],204);
                }
@@ -70,10 +71,9 @@ class EnseignantController extends Controller
                 'lastname' => 'required',
                 'email' => 'required|unique:etudiants',
                 'password' => 'required',
-                'cours_id' => 'required',
-                'cours_nom' => 'required',
                 'ratings' => 'required',
                 'teleN' => 'required',
+                'birthday'=>'required',
             
             ];
             $validator = Validator::make($request->all(),$rules);
@@ -89,6 +89,7 @@ class EnseignantController extends Controller
                     'cours_nom'=>$request->cours_nom,
                     'ratings'=>$request->ratings,
                     'teleN'=>$request->teleN,
+                    'birthday'=>$request->birthday
                 ]);
                 
                 if($result){

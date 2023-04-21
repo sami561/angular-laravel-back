@@ -17,10 +17,11 @@ return new class extends Migration
             $table->string('lastname',50);
             $table->string('email',50);
             $table->string('password');
+            $table->Date('birthday');
             $table->integer('ratings');
+            $table->string('image')->nullable();
             $table->integer('teleN');
-            $table->string('cours_id',50);
-            $table->string('cours_nom',50);
+            $table->string('role')->default('admin');
             $table->timestamps();
         });
     }
